@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FitFactory</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="states">
+        <item>User</item>
+        <item>Trainer</item>
+    </string-array>
+</resources>

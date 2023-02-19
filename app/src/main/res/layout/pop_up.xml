@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="150dp">
+
+    <TextView
+        android:id="@+id/popup_TXT_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_below="@id/popup_BTN_yes"
+        android:textSize="25sp"
+        android:text="Would you like to sign in?" />
+
+    <ImageView
+        android:id="@+id/popup_BTN_yes"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/yes"
+        tools:ignore="SpeakableTextPresentCheck">
+
+    </ImageView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/popup_TXT_question"
+        android:layout_centerInParent="true"
+        android:background="@drawable/status_shape"
+        android:minHeight="48dp"
+        android:text="yes!"
+        android:textSize="23sp">
+
+    </androidx.appcompat.widget.AppCompatButton>
+
+
+</RelativeLayout>

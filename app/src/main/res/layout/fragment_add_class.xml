@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrainerActivities.Fragments.AddClassFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/chooseClass"
+            android:layout_marginTop="40dp"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_below="@id/home_logo"
+            android:layout_marginBottom="20dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:text="Select the wanted class">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/home_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:contentDescription="logo"
+            android:src="@drawable/logo"
+            tools:ignore="ImageContrastCheck">
+
+        </ImageView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/addClass_options1"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_below="@id/chooseClass"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_pilates"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/pilates"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_yoga"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/yoga"
+                tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_dance"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dance"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/addClass_names1"
+            android:layout_width="350dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/addClass_options1"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/pilates_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:text="Pilates">
+
+            </TextView>
+            <TextView
+                android:id="@+id/yoga_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Yoga">
+
+            </TextView>
+            <TextView
+                android:id="@+id/dance_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Dance">
+
+            </TextView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/addClass_options2"
+            android:layout_width="350dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_below="@id/addClass_names1"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_cycling"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/cycling"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_crossfit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/crossfit"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+            <ImageButton
+                android:id="@+id/addClass_PIC_boxing"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@color/fui_transparent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/boxing"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck,TouchTargetSizeCheck" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/addClass_names2"
+            android:layout_width="350dp"
+            android:layout_height="20dp"
+            android:layout_below="@id/addClass_options2"
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/cycling_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:layout_weight="1"
+                android:text="Cycling">
+
+            </TextView>
+            <TextView
+                android:id="@+id/crossfit_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:textColor="@color/black"
+                android:text="Crossfit">
+
+            </TextView>
+            <TextView
+                android:id="@+id/boxing_name"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:layout_weight="1"
+                android:text="Boxing">
+
+            </TextView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:background="@drawable/rounded_shape"
+            android:elevation="2dp"
+            android:id="@+id/addClass_TXT_selectDate"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addClass_options2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:text="Select date"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addClass_BTN_availableHours"
+            android:layout_width="wrap_content"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addClass_TXT_selectDate"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/date_shape"
+            android:text="Available hours">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+        <Spinner
+
+            android:id="@+id/addClass_SPNR_freeHours"
+            android:layout_width="200dp"
+            android:visibility="invisible"
+            android:layout_height="50dp"
+            android:layout_below="@id/addClass_BTN_availableHours"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </Spinner>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/addClass_BTN_addClass"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/addClass_SPNR_freeHours"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="100dp"
+            android:background="@drawable/status_shape"
+            android:text="Confirm">
+
+        </androidx.appcompat.widget.AppCompatButton>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

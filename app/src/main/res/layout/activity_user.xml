@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".UserActivities.UserActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</LinearLayout>
+    <FrameLayout
+        android:id="@+id/main_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/main_bottom_bar"
+        android:scrollbars="horizontal"
+
+        />
+    <LinearLayout
+        android:id="@+id/main_bottom_bar"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:elevation="10dp"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/main_LL_home"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/main_BTN_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/selected_home"
+                tools:ignore="ImageContrastCheck">
+
+            </ImageView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_LL_notification"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/main_BTN_notification"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/notification">
+
+            </ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_LL_calendar"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/main_BTN_calendar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/calender"
+             >
+
+            </ImageView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_LL_contact"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/main_BTN_contact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/call_us">
+
+            </ImageView>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/main_LL_friends"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1">
+
+            <ImageView
+                android:id="@+id/main_BTN_friends"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/friends">
+
+            </ImageView>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

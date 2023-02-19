@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "466173486327",
+    "firebase_url": "https://fitfactory-9c523-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "fitfactory-9c523",
+    "storage_bucket": "fitfactory-9c523.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:466173486327:android:d4f56607fcfc92dd9a9ff2",
+        "android_client_info": {
+          "package_name": "com.example.fitfactory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "466173486327-mfctnob80bsnbtqhi66mg0jrgl07866n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBYk74TUDitEl3lousH-hAC7_nioo8Vxng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "466173486327-mfctnob80bsnbtqhi66mg0jrgl07866n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

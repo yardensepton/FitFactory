@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/FL_background"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TrainerActivities.TrainerActivity"
+    >
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_of_classes"
+        android:layout_width="603dp"
+        android:layout_height="913dp"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/class_item">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>
