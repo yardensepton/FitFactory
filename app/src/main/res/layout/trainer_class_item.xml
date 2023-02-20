@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="8dp"
+    android:minHeight="70dp"
+    app:cardElevation="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linear_layout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp">
+            <ImageView
+                android:id="@+id/arrow_imageview"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_above="@id/RV_IMG_classPic"
+                android:src="@drawable/arrow_down" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/RV_IMG_classPic"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:textColor="@color/black"
+                android:layout_centerVertical="true"
+                android:src="@drawable/pilates"
+                android:background="@drawable/date_shape">
+            </com.google.android.material.imageview.ShapeableImageView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/RV_IMG_className"
+                android:fontFamily="@font/caviar"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Pilates"
+                android:layout_centerHorizontal="true"
+                android:textSize="17sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/RV_IMG_classStartTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/caviar"
+                android:text="11:00"
+                android:textColor="@color/black"
+                android:textSize="17sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/RV_IMG_classDuration"
+                android:layout_width="wrap_content"
+                android:textColor="@color/black"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:fontFamily="@font/caviar"
+                android:text="45 min"
+                android:textSize="17sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/RV_IMG_classDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/RV_IMG_classStartTime"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/caviar"
+                android:text="date"
+                android:textColor="@color/black"
+                android:textSize="17sp">
+
+            </com.google.android.material.textview.MaterialTextView>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandable_layout">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/child_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

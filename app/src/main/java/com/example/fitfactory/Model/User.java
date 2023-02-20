@@ -4,10 +4,14 @@ import static com.example.fitfactory.AddToDataBase.updateUserInDB;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.example.fitfactory.AddToDataBase;
 import com.example.fitfactory.GetDataFromDataBase;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class User extends Human {
 
@@ -20,29 +24,23 @@ public class User extends Human {
     }
 
 
-//    public boolean reserveClass(GymClass gymClass,ArrayList<GymClass>gymClasses) {
-//        if (isUserAvailable(gymClass)) {
-////            getGymClasses().put(gymClass.getClassUUid(), gymClass);
-//            getGymClassesUUid().add(gymClass.getClassUUid());//add class to user
-//            gymClass.getSignedUsers().add(getUid());//add user to class
-//            addToDataBase.updateGymClassInDB(gymClass);
-//            updateAllUsersInDB();
-//
-//            return true;
-//        }
-//        return false;
-//    }
-
-    public boolean reserveClass(GymClass gymClass, ArrayList<GymClass> gymClasses) {
-        if (isUserAvailable(gymClass, gymClasses)) {
+    public int reserveClass(GymClass gymClass, ArrayList<GymClass> gymClasses) {
+        Calendar rightNow = Calendar.getInstance();
+        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        if (gymClass.isClassFull()) {
+            return -1;
+        } else if (isUserAvailable(gymClass, gymClasses)) {
             getGymClasses().add(gymClass.getClassUUid());//add class to user
             gymClass.getSignedUsers().add(getUid());//add user to class
             updateUserInDB(this);
             addToDataBase.updateGymClassInDB(gymClass);
+            return 1;
+        } else if(gymClass.getDate().equals(LocalDate.now().toString()) && gymClass.getStartHour()<= hour){
+            return -2;
+        } else {
+            return 0;
 
-            return true;
         }
-        return false;
     }
 
 
@@ -63,29 +61,13 @@ public class User extends Human {
     }
 
 
-//    public boolean isUserAvailable(GymClass newClass,ArrayList<GymClass>) {
-//        Log.d("check available", "");
-//        if (getGymClassesUUid().isEmpty()) {
-//            Log.d("empty available", "");
-//            return true;
-//        }
-//        ArrayList<GymClass> gymClasses = ();
-//        Log.d("size", "" + gymClasses.size());
-//        for (GymClass myClass : gymClasses) {
-//            Log.d("inside array available", "");
-//            if (myClass.equals(newClass)) {//check if the trainer is already in a class at the same time
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
 
 //    private void cancelClass(GymClass gymClass) {
 //        getGymClasses().remove(gymClass.getClassUUid(), gymClass);
 //    }
 
 
+    @NonNull
     @Override
     public String toString() {
         return "User{}";

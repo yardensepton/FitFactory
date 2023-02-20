@@ -27,14 +27,13 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
     private Finals.tab currentTab = Finals.tab.HOME;
     private TextView name;
     private ImageView trainer_BTN_home;
-    private ImageView trainer_BTN_classes;
     private ImageView trainer_BTN_add;
     private ImageView trainer_BTN_change;
-    private LinearLayout trainer_LL_classes;
     private LinearLayout trainer_LL_addClass;
     private LinearLayout trainer_LL_home;
     private LinearLayout trainer_LL_change;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     private ScaleAnimation scaleAnimation;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -57,12 +56,10 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
     public void findViews() {
         trainer_BTN_add = findViewById(R.id.trainer_BTN_add);
         trainer_BTN_change = findViewById(R.id.trainer_BTN_change);
-        trainer_BTN_classes = findViewById(R.id.trainer_BTN_classes);
         trainer_BTN_home = findViewById(R.id.trainer_BTN_home);
         trainer_LL_change = findViewById(R.id.trainer_LL_change);
         trainer_LL_addClass = findViewById(R.id.trainer_LL_addClass);
         trainer_LL_home = findViewById(R.id.trainer_LL_home);
-        trainer_LL_classes = findViewById(R.id.trainer_LL_classes);
         name = findViewById(R.id.name);
     }
 
@@ -71,8 +68,7 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         trainer_LL_home.setOnClickListener(view -> {
             if (currentTab != Finals.tab.HOME) {
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.main_screen, HomeTrainerFragment.class, null).commit();
-                fragmentsFunctions.changeToTrainerHomeFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change,
-                        trainer_BTN_classes, trainer_LL_home);
+                fragmentsFunctions.changeToTrainerHomeFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change, trainer_LL_home);
                 currentTab = Finals.tab.HOME;
             }
 
@@ -81,8 +77,7 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         trainer_LL_change.setOnClickListener(view -> {
             if (currentTab != Finals.tab.CHANGE_CLASS) {
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.main_screen, ChangeClassFragment.class, null).commit();
-                fragmentsFunctions.changeToTrainerChangeClassFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change,
-                        trainer_BTN_classes, trainer_LL_change);
+                fragmentsFunctions.changeToTrainerChangeClassFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change, trainer_LL_change);
                 currentTab = Finals.tab.CHANGE_CLASS;
             }
 
@@ -91,12 +86,12 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         trainer_LL_addClass.setOnClickListener(view -> {
             if (currentTab != Finals.tab.ADD_CLASS) {
                 getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.main_screen, AddClassFragment.class, null).commit();
-                fragmentsFunctions.changeToTrainerAddClassFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change,
-                        trainer_BTN_classes, trainer_LL_addClass);
+                fragmentsFunctions.changeToTrainerAddClassFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change, trainer_LL_addClass);
                 currentTab = Finals.tab.ADD_CLASS;
             }
 
         });
+
 
 
     }
@@ -109,5 +104,6 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         startActivity(intent);
         finish();
     }
+
 }
 

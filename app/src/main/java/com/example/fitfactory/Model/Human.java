@@ -7,7 +7,6 @@ public abstract class Human {
     private String uid = "";
     private String lastName = "";
     private String email = "";
-//    private HashMap<String, GymClass> gymClasses = new HashMap<>();
     private ArrayList<String> gymClasses = new ArrayList<>();
 
     public Human() {

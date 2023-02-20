@@ -27,7 +27,6 @@ public class Trainer extends Human {
         if (isTrainerAvailable(newClass,gymClasses)) {
             addToDataBase.updateGymClassInDB(newClass);
             getGymClasses().add(newClass.getClassUUid());
-//            getGymClasses().put(newClass.getClassUUid(), newClass);
             addToDataBase.updateTrainerInDB(this);
             return true;
         }
