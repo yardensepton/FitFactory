@@ -18,16 +18,17 @@
             android:contentDescription="logo">
 
         </ImageView>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/homeUser_BTN_signOut"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:textColor="@color/black"
-            android:text="sign out"
-            android:background="@drawable/date_shape">
 
-        </androidx.appcompat.widget.AppCompatButton>
+        <ImageButton
+            android:id="@+id/homeUser_BTN_signOut"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/date_shape"
+            android:src="@drawable/exit"
+            android:textColor="@color/black"
+            tools:ignore="SpeakableTextPresentCheck">
+
+        </ImageButton>
         <TextView
             android:id="@+id/homeUser_TXT_name"
             android:textColor="@color/black"
@@ -47,7 +48,7 @@
             android:layout_marginStart="20dp"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Your upcoming classes:"
+            android:text="My upcoming classes:"
             android:layout_below="@id/homeUser_TXT_name">
 
         </TextView>

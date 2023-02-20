@@ -7,7 +7,6 @@ public abstract class Human {
     private String uid = "";
     private String lastName = "";
     private String email = "";
-//    private HashMap<String, GymClass> gymClasses = new HashMap<>();
     private ArrayList<String> gymClasses = new ArrayList<>();
 
     public Human() {
@@ -57,19 +56,9 @@ public abstract class Human {
         return this;
     }
 
-//    public HashMap<String, GymClass> getGymClasses() {
-//        return gymClasses;
-//    }
-
-//    public Human setGymClasses(HashMap<String, GymClass> gymClasses) {
-//        this.gymClasses = gymClasses;
-//        return this;
-//    }
 
     @Override
     public String toString() {
-        return "Human{" +
-//                ", gymClasses=" + gymClasses +
-                '}';
+        return "Human";
     }
 }

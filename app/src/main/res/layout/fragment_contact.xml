@@ -8,22 +8,58 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/home_logo"
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_centerHorizontal="true"
+            android:contentDescription="logo"
             android:src="@drawable/logo"
-            tools:ignore="ImageContrastCheck"
-            android:contentDescription="logo">
+            tools:ignore="ImageContrastCheck">
 
         </ImageView>
+
+        <ImageView
+            android:id="@+id/contact_heart"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@id/home_logo"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="50dp"
+            android:contentDescription="logo"
+            android:src="@drawable/gym_love"
+            tools:ignore="ImageContrastCheck">
+
+        </ImageView>
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Need our help?"
-            android:textSize="20sp"
-            android:gravity="center"/>
+            android:background="@drawable/white_shape"
+            android:id="@+id/contact_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/contact_heart"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Have a question or want to chat with us about your fitness journey? \nOur friendly team is here to help!\n Just give us a call to speak with one of our knowledgeable trainers.\nWe'd love to hear from you and help you reach your fitness goals!"
+
+            android:lineSpacingMultiplier="2"
+            android:minLines="2"
+            android:textColor="@color/black"
+            android:textSize="17sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/contact_call"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_below="@id/contact_info"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/call"
+            tools:ignore="ImageContrastCheck,SpeakableTextPresentCheck">
+
+        </ImageButton>
 
 
     </RelativeLayout>

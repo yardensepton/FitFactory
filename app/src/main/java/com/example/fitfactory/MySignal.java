@@ -31,17 +31,5 @@ public class MySignal {
         Toast.makeText(context, text, Toast.LENGTH_LONG).show();
     }
 
-//    public void vibrate() {
-//        Vibrator v = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-//        // Vibrate for 500 milliseconds
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            v.vibrate(VibrationEffect.createOneShot(finals.VIBRATE_MILLISECONDS, VibrationEffect.DEFAULT_AMPLITUDE));
-//        } else {
-//            //deprecated in API 26
-//            v.vibrate(finals.VIBRATE_MILLISECONDS);
-//        }
-//    }
-
-
 
 }

@@ -7,11 +7,12 @@ import com.example.fitfactory.Finals;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.UUID;
 
 public class GymClass implements Comparable<GymClass> {
 
-    private final int MAX_USERS = 15;
+    private final int MAX_USERS = 8;
     private String classUUid;
     private ArrayList<String> signedUsers = new ArrayList<>();
 
@@ -22,9 +23,19 @@ public class GymClass implements Comparable<GymClass> {
     private String date;
     private int startHour;
     private int finishedHour;
+    private boolean isExpandable = false;
 
     public GymClass() {
         setClassUUid();
+    }
+
+
+    public boolean isExpandable() {
+        return isExpandable;
+    }
+
+    public void setExpandable(boolean expandable) {
+        isExpandable = expandable;
     }
 
     public String getClassUUid() {
@@ -39,6 +50,10 @@ public class GymClass implements Comparable<GymClass> {
 
     public ArrayList<String> getSignedUsers() {
         return signedUsers;
+    }
+
+    public boolean isClassFull() {
+        return signedUsers.size()==getMAX_USERS();
     }
 
     public GymClass setSignedUsers(ArrayList<String> signedUsers) {
@@ -75,6 +90,8 @@ public class GymClass implements Comparable<GymClass> {
             imageRes = Finals.BOXING_PIC;
         }
     }
+
+
 
     private void pilatesPic() {
         if (name.equals(Finals.classNames.PILATES)) {
@@ -120,15 +137,6 @@ public class GymClass implements Comparable<GymClass> {
     }
 
 
-//    public ArrayList<User> getSignedUsers() {
-//        return signedUsers;
-//    }
-//
-//    public GymClass setSignedUsers(ArrayList<User> signedUsers) {
-//        this.signedUsers = signedUsers;
-//        return this;
-//    }
-
     public int getFinishedHour() {
         return finishedHour;
     }
@@ -150,7 +158,6 @@ public class GymClass implements Comparable<GymClass> {
     public int getMAX_USERS() {
         return MAX_USERS;
     }
-
 
     public String getDate() {
         return date;
@@ -200,19 +207,27 @@ public class GymClass implements Comparable<GymClass> {
     }
 
 
+    public boolean isClassInThePast() {
+        Calendar rightNow = Calendar.getInstance();
+        int hour = rightNow.get(Calendar.HOUR_OF_DAY);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        //convert String to LocalDate
+        LocalDate thisDate = LocalDate.parse(getDate(), formatter);
+        LocalDate today =LocalDate.now();
+        if (thisDate.isBefore(today)) {
+            return true;
+        } else return thisDate.isEqual(today) && this.getStartHour() < hour;
+    }
+
+
 
 
 
     @NonNull
     @Override
     public String toString() {
-        return "GymClass{" +
-                "MAX_USERS=" + MAX_USERS +
-                ", name=" + name +
-                ", trainer=" + trainerId +
-                ", date=" + date +
-                ", startHour=" + startHour +
-                ", finishedHour=" + finishedHour +
-                '}';
+        return name +
+                "\nDate: " + date +
+                "\nStarts at: " + startHour +":"+"00";
     }
 }

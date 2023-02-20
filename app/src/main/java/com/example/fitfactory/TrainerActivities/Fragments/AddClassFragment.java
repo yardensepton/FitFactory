@@ -3,7 +3,6 @@ package com.example.fitfactory.TrainerActivities.Fragments;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,6 +91,9 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
 
 
 
+
+
+
     private void findViews(View view) {
         addClass_TXT_selectDate = view.findViewById(R.id.addClass_TXT_selectDate);
         addClass_BTN_availableHours = view.findViewById(R.id.addClass_BTN_availableHours);
@@ -118,7 +120,6 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
             year = calendar.get(Calendar.YEAR);
             month = calendar.get(Calendar.MONTH);
             day = calendar.get(Calendar.DAY_OF_MONTH);
-            Log.d("today",currentDate+"");
             DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
                 @SuppressLint("SetTextI18n")
                 @Override
@@ -126,7 +127,6 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
                     month=month+1;
                     addClass_TXT_selectDate.setText(dayOfMonth + " / " + month + " / " + year);
                     pickedDate = LocalDate.of(year, month, dayOfMonth);
-                    Log.d("new format date",pickedDate.toString());
                     showAvailableHoursClick();
 
                 }
@@ -152,14 +152,12 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
 
     private boolean checkDate() {
         if (pickedDate.isBefore(currentDate)) {
-            Log.d("date", Finals.futureDate);
             addClass_TXT_selectDate.setError(Finals.futureDate);
             MySignal.getInstance().toast(Finals.futureDate);
             addClass_TXT_selectDate.requestFocus();
             return false;
 
         } else if (addClass_TXT_selectDate.getText().equals("Select date")) {
-            Log.d("date", Finals.emptyFields);
             addClass_TXT_selectDate.setError(Finals.emptyFields);
             addClass_TXT_selectDate.setError(Finals.emptyFields);
             addClass_TXT_selectDate.requestFocus();
@@ -173,7 +171,7 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
 
 
     private void getAllTrainerClassesFromDB() {
-        db.getReference().child(Finals.gym_Classes).orderByChild("trainerId").equalTo(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).
+        db.getReference().child(Finals.gym_Classes).orderByChild(Finals.trainerId).equalTo(Objects.requireNonNull(mAuth.getCurrentUser()).getUid()).
                 addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -182,10 +180,8 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
                                 GymClass gymClass = ds.getValue(GymClass.class);
                                 assert gymClass != null;
                                 gymClasses.add(gymClass);
-                                Log.d("get classes of user in home user fra working",""+gymClass.getTeacherName());
                             }
                         } else {
-                            Log.d("get classes of user in home user fra","");
                         }
                     }
 
@@ -318,9 +314,9 @@ public class AddClassFragment extends Fragment implements AdapterView.OnItemSele
     private void confirm() {
         addClass_BTN_addClass.setOnClickListener(v -> {
             if (!trainer.addClass(currentClassName, Integer.parseInt(hour), pickedDate,gymClasses)) {
-                MySignal.getInstance().toast("You already work at that time and date");
+                MySignal.getInstance().toast(Finals.working);
             } else {
-                MySignal.getInstance().toast("Gym class added :)");
+                MySignal.getInstance().toast(Finals.added);
             }
             getAllTrainerClassesFromDB();
             addClass_SPNR_freeHours.setVisibility(View.INVISIBLE);

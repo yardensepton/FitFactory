@@ -49,22 +49,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/main_LL_notification"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/main_BTN_notification"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/notification">
-
-            </ImageView>
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/main_LL_calendar"
@@ -103,23 +87,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/main_LL_friends"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/main_BTN_friends"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/friends">
-
-            </ImageView>
-
-
-        </LinearLayout>
     </LinearLayout>
 
 

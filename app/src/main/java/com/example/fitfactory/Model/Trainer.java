@@ -1,12 +1,9 @@
 package com.example.fitfactory.Model;
 
-import android.util.Log;
-
 import androidx.annotation.NonNull;
 
 import com.example.fitfactory.AddToDataBase;
 import com.example.fitfactory.Finals;
-import com.example.fitfactory.GetDataFromDataBase;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,7 +13,6 @@ import java.util.HashMap;
 public class Trainer extends Human {
 
     private AddToDataBase addToDataBase = new AddToDataBase();
-    private GetDataFromDataBase getDataFromDataBase = new GetDataFromDataBase();
     public Trainer() {
         super();
     }
@@ -27,7 +23,6 @@ public class Trainer extends Human {
         if (isTrainerAvailable(newClass,gymClasses)) {
             addToDataBase.updateGymClassInDB(newClass);
             getGymClasses().add(newClass.getClassUUid());
-//            getGymClasses().put(newClass.getClassUUid(), newClass);
             addToDataBase.updateTrainerInDB(this);
             return true;
         }
@@ -38,13 +33,10 @@ public class Trainer extends Human {
 
 
     public boolean isTrainerAvailable(GymClass newClass,ArrayList<GymClass>gymClasses) {
-        Log.d("check available","");
         if (getGymClasses().isEmpty()){
-            Log.d("empty available","");
             return true;
         }
         for (GymClass myClass : gymClasses) {
-            Log.d("inside array available","");
             if (myClass.equals(newClass)) {//check if the trainer is already in a class at the same time
                 return false;
             }
@@ -52,32 +44,6 @@ public class Trainer extends Human {
         return true;
     }
 
-//    public boolean isTrainerAvailableAtTheNewDate(GymClass newClass, LocalDate newDate) {
-//        for (GymClass myClass : getGymClasses().values()) {
-//            if (myClass.getDate().equals(newDate.toString()) && myClass.getStartHour() == newClass.getStartHour()) {//check if the trainer is already in a class at the same time
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
-
-
-//    public void removeClass(GymClass gymClass) {
-//        getGymClasses().remove(gymClass.getClassUUid(), gymClass);
-//    }
-//
-//    public void changeClassTime(GymClass gymClass, int hour) {
-//        if (isTrainerAvailable(gymClass)) {
-//            Objects.requireNonNull(getGymClasses().get(gymClass.getClassUUid())).setStartHour(hour).setFinishedHour();
-//        }
-//    }
-//
-//    public void changeClassDate(GymClass gymClass, LocalDate date) {
-//        if (isTrainerAvailableAtTheNewDate(gymClass, date)) {
-//            Objects.requireNonNull(getGymClasses().get(gymClass.getClassUUid())).setDate(date);
-//
-//        }
-//    }
 
     public ArrayList<Integer> showFreeHours(LocalDate date,ArrayList<GymClass>gymClasses) {
         Calendar rightNow = Calendar.getInstance();
@@ -103,7 +69,7 @@ public class Trainer extends Human {
             }
         }else {
             for (int i = start; i < Finals.END_WORK_DAY ; i++) {
-                if (!timeOfClassesInTheDate.containsKey(i)){//if there isn't a class at that time - add it to the list
+                if (!timeOfClassesInTheDate.containsKey(i)){
                     availableHours.add(i);
                 }
             }
