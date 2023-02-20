@@ -25,7 +25,7 @@ import com.example.fitfactory.Model.GymClass;
 import com.example.fitfactory.Model.User;
 import com.example.fitfactory.MySignal;
 import com.example.fitfactory.R;
-import com.example.fitfactory.RV_adapter_gymClasses;
+import com.example.fitfactory.UserActivities.RV_adapter_gymClasses;
 import com.example.fitfactory.UserActivities.CalendarAdapter;
 import com.example.fitfactory.UserActivities.CalendarUtils;
 import com.google.firebase.auth.FirebaseAuth;
@@ -46,6 +46,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     private DatabaseReference databaseReference;
     private TextView calendar_name;
     private ArrayList<GymClass> gymClasses;
+    private int maxNum = 0;
     private RV_adapter_gymClasses adapter_classes;
     private ArrayList<GymClass> chosenDayGymClasses;
     private RecyclerView recycle_gymClassesInTheDate;
@@ -79,7 +80,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         getClassesInSpecificDateFromDB(LocalDate.now());
         previousWeekAction();
         nextWeekAction();
-        //        getData();
         return view;
 
 
@@ -94,23 +94,25 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         calendar_BTN_nextWeek = view.findViewById(R.id.calendar_BTN_nextWeek);
     }
 
+
     private void getClassesOfUserFromDB() {
+
         db.getReference().child(Finals.gym_Classes).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         if (ds.hasChild(Finals.signedUsers)) {
-                            Log.d("yayyyyyyyyyyyyyyyyy", "" );
+                            Log.d("yayyyyyyyyyyyyyyyyy", "");
                             Object snapshotValue = ds.getValue();
                             assert snapshotValue != null;
                             GymClass gymClass = ds.getValue(GymClass.class);
                             assert gymClass != null;
-                            for (String us:gymClass.getSignedUsers()) {
-                                Log.d("yayyyyyyyyyyyyyyyyy 2", "" );
-                                if (us.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())){
+                            for (String us : gymClass.getSignedUsers()) {
+                                Log.d("yayyyyyyyyyyyyyyyyy 2", "");
+                                if (us.equals(Objects.requireNonNull(mAuth.getCurrentUser()).getUid())) {
                                     gymClasses.add(gymClass);
-                                    Log.d("yayyyyyyyyyyyyyyyyy 3", "" );
+                                    Log.d("yayyyyyyyyyyyyyyyyy 3", "");
                                 }
 
                             }
@@ -131,6 +133,41 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
 
+    private void getNumOfUsersInClassFromDB(GymClass chosenClass) {
+        db.getReference().child(Finals.gym_Classes).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    maxNum=0;
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.hasChild(Finals.signedUsers)) {
+                            Log.d("yayyyyyyyyyyyyyyyyy", "");
+                            Object snapshotValue = ds.getValue();
+                            assert snapshotValue != null;
+                            GymClass gymClass = ds.getValue(GymClass.class);
+                            assert gymClass != null;
+                            if (gymClass.getClassUUid().equals(chosenClass.getClassUUid())){
+                                gymClass.getSignedUsers().forEach(us -> {
+                                    maxNum++;
+                                    Log.d("yayyyyyyyyyyyyyyyyy 2", ""+maxNum);
+                                });
+                            }
+
+
+                        }
+
+                    }
+                } else {
+                    Log.d("get classes of user in home user fra", "");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
 
 
     private void setWeekView() {
@@ -142,7 +179,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
         recycle_datesOfWeek.setAdapter(calendarAdapter);
 
     }
-
 
 
     public void previousWeekAction() {
@@ -174,7 +210,7 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
                                 GymClass gymClass = ds.getValue(GymClass.class);
                                 assert gymClass != null;
                                 chosenDayGymClasses.add(gymClass);
-                                Log.d("dayyyyysysusd 3", ""+gymClass.getDate() );
+                                Log.d("dayyyyysysusd 3", "" + gymClass.getDate());
                             }
                             setGymClassAdapter();
                         } else {
@@ -219,7 +255,6 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     }
 
 
-
     private void setGymClassAdapter() {
         recycle_gymClassesInTheDate.setVisibility(View.VISIBLE);
         adapter_classes = new RV_adapter_gymClasses(getContext(), chosenDayGymClasses);
@@ -238,11 +273,15 @@ public class CalendarFragment extends Fragment implements CalendarAdapter.OnItem
     @Override
     public void onItemClick(int position) {
         getClassesOfUserFromDB();
-        Log.d("classes size",""+ gymClasses.size());
-        Log.d("classes pos",""+ adapter_classes.getItem(position));
-        if (!user.reserveClass(adapter_classes.getItem(position),gymClasses)) {
+        Log.d("classes size", "" + gymClasses.size());
+        Log.d("classes pos", "" + adapter_classes.getItem(position));
+        getNumOfUsersInClassFromDB(adapter_classes.getItem(position));
+        int res = user.reserveClass(adapter_classes.getItem(position), gymClasses,maxNum);
+        if (res==0) {
             MySignal.getInstance().toast("You already have a class at that time and date");
-        } else {
+        } if (res==-1){
+            MySignal.getInstance().toast("Sorry the class is full");
+        }else if(res == 1){
             MySignal.getInstance().toast("Gym class added :)");
             adapter_classes.getItem(position);
         }

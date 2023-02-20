@@ -19,10 +19,11 @@ import com.example.fitfactory.Finals;
 import com.example.fitfactory.GetDataFromDataBase;
 import com.example.fitfactory.Model.GymClass;
 import com.example.fitfactory.Model.Trainer;
+import com.example.fitfactory.Model.User;
 import com.example.fitfactory.MySignal;
 import com.example.fitfactory.R;
-import com.example.fitfactory.RV_adapter_gymClasses;
 import com.example.fitfactory.SignOutCallBack;
+import com.example.fitfactory.TrainerActivities.RV_adapter_TrainerGymClasses;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,8 +37,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Objects;
 
-public class HomeTrainerFragment extends Fragment {
-    private RV_adapter_gymClasses adapter_trainer;
+public class HomeTrainerFragment extends Fragment{
+    private RV_adapter_TrainerGymClasses adapter_trainer;
+    //    private RV_adapter_signedUserInfo adapter_user;
+//    private RecyclerView list_of_signedUsers;
+    private ArrayList<String> signedUsers = new ArrayList<>();
     private TextView homeTrainer_TXT_name;
     private RecyclerView list_of_classes;
     private GetDataFromDataBase dataFromDataBase;
@@ -62,17 +66,16 @@ public class HomeTrainerFragment extends Fragment {
         getTrainerData();
         getAllTrainerClassesFromDB();
         signOutClick();
+
 //        getData();
         return view;
     }
 
     @Override
-    public void onAttach(@NonNull Context context)
-    {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         signOutCallBack = (SignOutCallBack) context;
     }
-
 
 
     private void signOutClick() {
@@ -84,33 +87,31 @@ public class HomeTrainerFragment extends Fragment {
         });
     }
 
+//    @Override
+//    public void onItemClick(int position){
+//        GymClass gymClass = adapter_trainer.getItem(position);
+//        Log.d("the gym class is", gymClass.getClassUUid());
+//        ArrayList<String> signedUsers = signedUsersCallBack.showSignedUsersCallBack(gymClass);
+//        if (signedUsers!=null){
+//            setSignedUsersAdapter(signedUsers);
+//        }
+//
+////        SignedUsersFragment dialogFragment = new SignedUsersFragment();
+////        Bundle bundle = new Bundle();
+////        bundle.getStringArrayList(signedUsers.toString());
+////        dialogFragment.setArguments(bundle);
+////        dialogFragment.show(getParentFragmentManager(),"signedUsers");
+//
+//    }
 
-//    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-//        @Override
-//        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
-//            return false;
-//        }
-//
-//        @Override
-//        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
-//            MySignal.getInstance().toast("swipe");
-//            int position = viewHolder.getAdapterPosition();
-//            if (direction == ItemTouchHelper.RIGHT) {
-//                GymClass classToRemove = adapter_trainer.getItem(position);
-//                gymClasses.remove(classToRemove);
-//                adapter_trainer.notifyItemRemoved(position);
-//                removeClassFromDB(classToRemove);
-//            }
-//
-//        }
-//    };
+
+
 
 
     public void findViews(View view) {
         homeTrainer_TXT_name = view.findViewById(R.id.homeTrainer_TXT_name);
         list_of_classes = view.findViewById(R.id.list_of_classes);
         homeTrainer_BTN_signOut = view.findViewById(R.id.homeTrainer_BTN_signOut);
-
     }
 
     private String greetTrainer() {
@@ -159,11 +160,11 @@ public class HomeTrainerFragment extends Fragment {
                                 GymClass gymClass = ds.getValue(GymClass.class);
                                 assert gymClass != null;
                                 gymClasses.add(gymClass);
-                                Log.d("get classes of user in home user fra working",""+gymClass.getTeacherName());
+                                Log.d("get classes of user in home user fra working", "" + gymClass.getTeacherName());
                             }
                             setGymClassAdapter();
                         } else {
-                            Log.d("get classes of user in home user fra","");
+                            Log.d("get classes of user in home user fra", "");
                         }
                     }
 
@@ -175,19 +176,55 @@ public class HomeTrainerFragment extends Fragment {
     }
 
 
+    private void getAllSignedUsersOfClassFromDB(GymClass gymClass) {
+        db.getReference().child(Finals.users).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    signedUsers.clear();
+                    for (DataSnapshot ds : snapshot.getChildren()) {
+                        if (ds.hasChild(Finals.gymClasses)) {
+                            User user = ds.getValue(User.class);
+                            assert user != null;
+                            Log.d("user exists", ""+ user.getName());
+                            for (String us:user.getGymClasses()) {
+                                Log.d("user has a class", "" + us);
+                                if (us.equals(gymClass.getClassUUid())){
+                                    signedUsers.add(user.getName()+" "+ user.getLastName());
+                                    Log.d("yayyyyyyyyyyyyyyyyy 3", "" );
+                                }
+
+                            }
+
+                        }
+
+                    }
+//                    setSignedUsersAdapter(signedUsers);
+                } else {
+                    Log.d("get classes of user in home user fra", "");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
     private void setGymClassAdapter() {
-        adapter_trainer = new RV_adapter_gymClasses(getContext(), showFutureClasses(gymClasses));
+        adapter_trainer = new RV_adapter_TrainerGymClasses(getContext(), showFutureClasses(gymClasses));
         list_of_classes.setLayoutManager(new LinearLayoutManager(getContext()));
         list_of_classes.setAdapter(adapter_trainer);
     }
 
 
-    public ArrayList<GymClass> showFutureClasses(ArrayList<GymClass> gymClasses){
+    public ArrayList<GymClass> showFutureClasses(ArrayList<GymClass> gymClasses) {
         ArrayList<GymClass> relevantClasses = new ArrayList<>();
-        for (GymClass gymClass:gymClasses) {
+        for (GymClass gymClass : gymClasses) {
             LocalDate classDate = LocalDate.parse(gymClass.getDate());
-            if (classDate.isAfter(LocalDate.now()) || classDate.isEqual(LocalDate.now()) ){
+            if (classDate.isAfter(LocalDate.now()) || classDate.isEqual(LocalDate.now())) {
                 relevantClasses.add(gymClass);
             }
         }
@@ -206,7 +243,7 @@ public class HomeTrainerFragment extends Fragment {
                             trainer = task.getResult().getValue(Trainer.class);
                             assert trainer != null;
                             homeTrainer_TXT_name.setText(greetTrainer() + " " + trainer.getName());
-                            Log.d("uid",trainer.getUid());
+                            Log.d("uid", trainer.getUid());
                         } else {
                             MySignal.getInstance().toast(String.valueOf(task.getException()));
                         }
@@ -243,4 +280,6 @@ public class HomeTrainerFragment extends Fragment {
             }
         });
     }
+
+
 }

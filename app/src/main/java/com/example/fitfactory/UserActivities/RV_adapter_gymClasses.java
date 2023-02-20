@@ -1,4 +1,4 @@
-package com.example.fitfactory;
+package com.example.fitfactory.UserActivities;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -6,12 +6,12 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.fitfactory.Model.GymClass;
+import com.example.fitfactory.R;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 
@@ -53,26 +53,19 @@ public class RV_adapter_gymClasses extends RecyclerView.Adapter<RV_adapter_gymCl
         return viewHolder;
     }
 
-    private void initDialog(RecyclerView.ViewHolder viewHolder) {
-        dialog = new Dialog(context);
-        dialog.setContentView(R.layout.pop_up);
-        ImageView popup_BTN_yes = dialog.findViewById(R.id.popup_BTN_yes);
-        popup_BTN_yes.setOnClickListener(v -> {
-
-        });
-
-    }
 
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull RV_adapter_gymClasses.GymClassesViewHolder holder, int position) {
+        GymClass gymClass = getItem(position);
+        gymClass.setImageRes();
         holder.RV_IMG_className.setText("" + gymClasses.get(position).getName().toString() + " with " + gymClasses.get(position).getTeacherName());
-        holder.RV_IMG_classPic.setImageResource(gymClasses.get(position).getImageRes());
         holder.RV_IMG_classStatus.setText("free");
         holder.RV_IMG_classStartTime.setText("" + gymClasses.get(position).getStartHour() + ":" + "00" + "-" + gymClasses.get(position).getFinishedHour() + ":00");
         holder.RV_IMG_classDuration.setText("1 hour");
         holder.RV_IMG_classDate.setText("" + gymClasses.get(position).getDate());
+        holder.RV_IMG_classPic.setImageResource(gymClass.getImageRes());
 
         holder.itemView.setOnClickListener(v -> {
             if (onItemClickListener !=null){
@@ -80,6 +73,10 @@ public class RV_adapter_gymClasses extends RecyclerView.Adapter<RV_adapter_gymCl
             }
         });
 
+
+    }
+
+    private void checkIfCorrectPic(int image,int pos){
 
     }
 

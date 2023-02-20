@@ -81,7 +81,7 @@ public class ReplacingFragmentsFunctions {
         trainer_BTN_home.setImageResource(R.drawable.selected_home);
         trainer_BTN_change.setImageResource(R.drawable.change_icon);
         trainer_BTN_add.setImageResource(R.drawable.add_icon);
-        trainer_BTN_classes.setImageResource(R.drawable.trainer_icon);
+        trainer_BTN_classes.setImageResource(R.drawable.signed_users_icon);
         createAnim();
         trainer_LL_home.startAnimation(scaleAnimation);
     }
@@ -91,7 +91,7 @@ public class ReplacingFragmentsFunctions {
         trainer_BTN_home.setImageResource(R.drawable.home);
         trainer_BTN_change.setImageResource(R.drawable.selected_change);
         trainer_BTN_add.setImageResource(R.drawable.add_icon);
-        trainer_BTN_classes.setImageResource(R.drawable.trainer_icon);
+        trainer_BTN_classes.setImageResource(R.drawable.signed_users_icon);
         createAnim();
         trainer_LL_change.startAnimation(scaleAnimation);
     }
@@ -102,9 +102,19 @@ public class ReplacingFragmentsFunctions {
         trainer_BTN_home.setImageResource(R.drawable.home);
         trainer_BTN_change.setImageResource(R.drawable.change_icon);
         trainer_BTN_add.setImageResource(R.drawable.selected_add);
-        trainer_BTN_classes.setImageResource(R.drawable.trainer_icon);
+        trainer_BTN_classes.setImageResource(R.drawable.signed_users_icon);
         createAnim();
         trainer_LL_addClass.startAnimation(scaleAnimation);
+    }
+
+    public void changeToTrainerUserInfoFragment(ImageView trainer_BTN_home, ImageView trainer_BTN_add, ImageView
+            trainer_BTN_change, ImageView trainer_BTN_classes, LinearLayout trainer_LL_signedUsersInfo) {
+        trainer_BTN_home.setImageResource(R.drawable.home);
+        trainer_BTN_change.setImageResource(R.drawable.change_icon);
+        trainer_BTN_add.setImageResource(R.drawable.add_icon);
+        trainer_BTN_classes.setImageResource(R.drawable.selected_signed_users);
+        createAnim();
+        trainer_LL_signedUsersInfo.startAnimation(scaleAnimation);
     }
 
 }

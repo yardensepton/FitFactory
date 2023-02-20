@@ -2,15 +2,19 @@ package com.example.fitfactory.TrainerActivities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.fitfactory.Finals;
+import com.example.fitfactory.Model.GymClass;
+import com.example.fitfactory.Model.User;
 import com.example.fitfactory.R;
 import com.example.fitfactory.RegisterActivity;
 import com.example.fitfactory.SignOutCallBack;
@@ -18,8 +22,13 @@ import com.example.fitfactory.TrainerActivities.Fragments.AddClassFragment;
 import com.example.fitfactory.TrainerActivities.Fragments.ChangeClassFragment;
 import com.example.fitfactory.TrainerActivities.Fragments.HomeTrainerFragment;
 import com.example.fitfactory.UserActivities.ReplacingFragmentsFunctions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class TrainerActivity extends AppCompatActivity implements SignOutCallBack {
 
@@ -28,13 +37,15 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
     private TextView name;
     private ImageView trainer_BTN_home;
     private ImageView trainer_BTN_classes;
+    private ArrayList<String> signedUsers = new ArrayList<>();
     private ImageView trainer_BTN_add;
     private ImageView trainer_BTN_change;
-    private LinearLayout trainer_LL_classes;
+    private LinearLayout trainer_LL_signedUsersInfo;
     private LinearLayout trainer_LL_addClass;
     private LinearLayout trainer_LL_home;
     private LinearLayout trainer_LL_change;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
     private ScaleAnimation scaleAnimation;
     FirebaseDatabase db = FirebaseDatabase.getInstance();
 
@@ -62,7 +73,7 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         trainer_LL_change = findViewById(R.id.trainer_LL_change);
         trainer_LL_addClass = findViewById(R.id.trainer_LL_addClass);
         trainer_LL_home = findViewById(R.id.trainer_LL_home);
-        trainer_LL_classes = findViewById(R.id.trainer_LL_classes);
+        trainer_LL_signedUsersInfo = findViewById(R.id.trainer_LL_signedUsersInfo);
         name = findViewById(R.id.name);
     }
 
@@ -98,6 +109,47 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
 
         });
 
+//        trainer_LL_signedUsersInfo.setOnClickListener(v -> {
+//            if (currentTab != Finals.tab.SIGNED_USERS) {
+//                getSupportFragmentManager().beginTransaction().setReorderingAllowed(true).replace(R.id.main_screen, SignedUsersFragment.class, null).commit();
+//                fragmentsFunctions.changeToTrainerUserInfoFragment(trainer_BTN_home, trainer_BTN_add, trainer_BTN_change,
+//                        trainer_BTN_classes, trainer_LL_signedUsersInfo);
+//                currentTab = Finals.tab.SIGNED_USERS;
+//            }
+//        });
+
+
+    }
+
+
+    private void getAllSignedUsersOfClassFromDB(GymClass gymClass) {
+        db.getReference().child(Finals.users).get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DataSnapshot> task) {
+                if (task.isSuccessful()){
+                    signedUsers.clear();
+                    for (DataSnapshot ds:task.getResult().getChildren()){
+                        if (ds.hasChild(Finals.gymClasses)){
+                            User user = ds.getValue(User.class);
+                            assert user != null;
+                            Log.d("user exists", ""+ user.getName());
+                            for (String us:user.getGymClasses()){
+                                Log.d("user has a class", "" + us);
+                                if (us.equals(gymClass.getClassUUid())){
+                                    signedUsers.add(user.getName() + " "+ user.getLastName());
+                                    Log.d("yayyyyyyyyyyyyyyyyy 3", "" );
+                                }
+                            }
+                        }
+                    }
+                }else {
+
+                    Log.d("get classes of user in home user fra", "");
+                }
+
+            }
+        });
+
 
     }
 
@@ -109,5 +161,6 @@ public class TrainerActivity extends AppCompatActivity implements SignOutCallBac
         startActivity(intent);
         finish();
     }
+
 }
 

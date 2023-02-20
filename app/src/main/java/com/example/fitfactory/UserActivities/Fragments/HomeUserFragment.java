@@ -21,7 +21,7 @@ import com.example.fitfactory.Model.GymClass;
 import com.example.fitfactory.Model.User;
 import com.example.fitfactory.MySignal;
 import com.example.fitfactory.R;
-import com.example.fitfactory.RV_adapter_gymClasses;
+import com.example.fitfactory.UserActivities.RV_adapter_gymClasses;
 import com.example.fitfactory.SignOutCallBack;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;

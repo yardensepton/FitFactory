@@ -86,7 +86,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/trainer_LL_classes"
+        android:id="@+id/trainer_LL_signedUsersInfo"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -96,7 +96,7 @@
           android:id="@+id/trainer_BTN_classes"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:src="@drawable/trainer_icon">
+          android:src="@drawable/signed_users_icon">
 
       </ImageView>
 

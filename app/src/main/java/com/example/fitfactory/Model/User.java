@@ -33,16 +33,19 @@ public class User extends Human {
 //        return false;
 //    }
 
-    public boolean reserveClass(GymClass gymClass, ArrayList<GymClass> gymClasses) {
-        if (isUserAvailable(gymClass, gymClasses)) {
+    public int reserveClass(GymClass gymClass, ArrayList<GymClass> gymClasses, int maxNum) {
+        if (maxNum == gymClass.getMaxNumUsers()) {
+            return -1;
+        } else if (isUserAvailable(gymClass, gymClasses)) {
             getGymClasses().add(gymClass.getClassUUid());//add class to user
             gymClass.getSignedUsers().add(getUid());//add user to class
             updateUserInDB(this);
             addToDataBase.updateGymClassInDB(gymClass);
+            return 1;
+        } else {
+            return 0;
 
-            return true;
         }
-        return false;
     }
 
 
