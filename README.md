@@ -6,7 +6,7 @@ The app is built using Java on Android Studio and connects to a real-time databa
 Real-time databases allow for instant updates and synchronization, so trainers and gym members can see changes in class schedules and attendance records as soon as they occur.<br>
 This means that gym trainers can manage their classes in real-time and gym members can sign up and join classes on the spot, without having to wait for manual updates.<br>
 
-##The app has a trainer side and a user side.
+##The app has a trainer side and a user side.##
 *With the trainer side of the app gym trainers can create classes.
 
 *On the user side of the app, gym members can browse through available classes, sign up and join classes in real-time.
