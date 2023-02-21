@@ -16,7 +16,11 @@ Real-time databases allow for instant updates and synchronization, so trainers a
 
 The app has a clean and user-friendly interface that is easy to navigate and use.
 
-https://user-images.githubusercontent.com/98481395/220461876-6200efa4-74b6-4c27-8e13-93f955b1a826.mp4
+
+https://user-images.githubusercontent.com/98481395/220467856-e8c42401-cc1c-4a30-ad07-1fc57f26daa0.mp4
+
+
+
 
 ### Registration page:
 
