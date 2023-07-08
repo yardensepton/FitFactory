@@ -3,7 +3,7 @@
 Fit factory is a mobile application that allows gym trainers and users to manage and join fitness classes.<br>
 *************************************************************************************************************************************************************************
 
-The app is built using Java on Android Studio and connects to a real-time databas.<br>
+The app is built using Java on Android Studio and connects to a real-time database.<br>
 
 Real-time databases allow for instant updates and synchronization, so trainers and gym members can see changes in class schedules and attendance records as soon as they occur.<br>
 <br>
